@@ -1,0 +1,19 @@
+create table CDRHUA_PGW_LOTV
+(
+  fid             NUMBER not null,
+  dtm             DATE not null,
+  rid             NUMBER not null,
+  ridb            NUMBER not null,
+  lotv_datau      NUMBER,
+  lotv_datad      NUMBER,
+  lotv_chcnd      NUMBER,
+  lotv_changetime TIMESTAMP(0) WITH TIME ZONE,
+  rvers           VARCHAR2(2),
+  lotv_userloc    VARCHAR2(30),
+  swid            NUMBER,
+  errs            VARCHAR2(4000)
+)
+nologging;
+create index I_CDRHUA_PGW_LOTV on CDRHUA_PGW_LOTV (RIDB, DTM)
+  nologging;
+

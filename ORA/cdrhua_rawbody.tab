@@ -1,0 +1,19 @@
+create table CDRHUA_RAWBODY
+(
+  fid   NUMBER not null,
+  fname VARCHAR2(128) not null,
+  swid  NUMBER,
+  rnum  NUMBER not null,
+  md5   RAW(16) not null,
+  dtm   DATE not null,
+  rid   NUMBER not null,
+  rtype VARCHAR2(8) not null,
+  rbody RAW(2000) not null,
+  rvers VARCHAR2(2),
+  info  VARCHAR2(4000)
+)
+compress
+nologging;
+create unique index UI_CDRHUA_RAWBODY on CDRHUA_RAWBODY (DTM, MD5, RVERS)
+  nologging;
+

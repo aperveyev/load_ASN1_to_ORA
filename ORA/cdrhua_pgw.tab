@@ -1,0 +1,70 @@
+create table CDRHUA_PGW
+(
+  swid               NUMBER not null,
+  fid                NUMBER not null,
+  dtm                DATE not null,
+  ridb               NUMBER not null,
+  rid                NUMBER not null,
+  rvers              VARCHAR2(2),
+  servedimsi         VARCHAR2(20) not null,
+  servedimeisv       VARCHAR2(20),
+  chargingid         NUMBER not null,
+  apnameni           VARCHAR2(20),
+  duration           NUMBER,
+  causeforrecclosing NUMBER not null,
+  recordseqnumber    NUMBER,
+  localseqnum        NUMBER,
+  srvnodeplmnid      VARCHAR2(30),
+  servedmsisdn       VARCHAR2(20),
+  rattype            NUMBER,
+  pgwaddress         VARCHAR2(20) not null,
+  srvnodeaddress     VARCHAR2(20) not null,
+  servedpdnaddress   VARCHAR2(20) not null,
+  lotv_volul         NUMBER,
+  lotv_voldl         NUMBER,
+  lotv_chcond        NUMBER,
+  lotv_chtime        TIMESTAMP(0) WITH TIME ZONE,
+  lotv_userloc       VARCHAR2(30),
+  userloc            VARCHAR2(30),
+  losd_rgroup        NUMBER,
+  losd_chrulename    VARCHAR2(30),
+  losd_localseqnum   NUMBER,
+  losd_timefirst     DATE,
+  losd_timelast      DATE,
+  losd_timeusage     NUMBER,
+  losd_srvcondch     VARCHAR2(8),
+  losd_rattype       NUMBER,
+  losd_sgsnaddress   VARCHAR2(20),
+  losd_userloc       VARCHAR2(30),
+  losd_datau         NUMBER,
+  losd_datad         NUMBER,
+  losd_timerep       DATE,
+  losd_srvidentifier NUMBER,
+  info               VARCHAR2(4000),
+  errs               VARCHAR2(4000),
+  x#status           CHAR(4) default '----',
+  x#features         CHAR(4) default '----',
+  x#lru              DATE default sysdate,
+  a#partid           NUMBER,
+  a#dtm              DATE,
+  a#dur              NUMBER,
+  a#datau            NUMBER,
+  a#datad            NUMBER,
+  e#sptos            NUMBER,
+  e#spocs            NUMBER,
+  e#spnum            VARCHAR2(32),
+  e#spton            VARCHAR2(4),
+  o#block            NUMBER,
+  o#1                VARCHAR2(128),
+  o#1pid             NUMBER,
+  o#1lru             DATE
+)
+nologging;
+create unique index UI_CDRHUA_PGW on CDRHUA_PGW (RID, DTM, RVERS)
+  nologging;
+alter table CDRHUA_PGW
+  add constraint CK_CDRHUA_PGW_INFO_JSON
+  check (info is json)
+  disable
+  novalidate;
+

@@ -1,0 +1,37 @@
+create table CDRHUA_SGSN
+(
+  swid               NUMBER not null,
+  fid                NUMBER not null,
+  dtm                DATE not null,
+  ridb               NUMBER not null,
+  rid                NUMBER not null,
+  rvers              VARCHAR2(2),
+  servedimsi         VARCHAR2(20) not null,
+  servedimei         VARCHAR2(20),
+  sgsnaddress        VARCHAR2(20),
+  locationareacode   VARCHAR2(20),
+  cellidentifier     VARCHAR2(20),
+  chargingid         NUMBER not null,
+  ggsnaddress        VARCHAR2(20) not null,
+  apnameni           VARCHAR2(80),
+  servedpdpaddress   VARCHAR2(20),
+  voluplink          NUMBER default 0 not null,
+  voldownlink        NUMBER default 0 not null,
+  changecondition    NUMBER not null,
+  changetime         TIMESTAMP(0) WITH TIME ZONE not null,
+  duration           NUMBER not null,
+  causeforrecclosing NUMBER not null,
+  recordseqnumber    NUMBER,
+  servedmsisdn       VARCHAR2(20),
+  rattype            NUMBER,
+  info               VARCHAR2(4000),
+  errs               VARCHAR2(4000)
+)
+;
+create unique index UI_CDRHUA_SGSN on CDRHUA_SGSN (RID, DTM, RVERS);
+alter table CDRHUA_SGSN
+  add constraint CK_CDRHUA_SGSN_INFO_JSON
+  check (info is json)
+  disable
+  novalidate;
+

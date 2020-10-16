@@ -1,0 +1,23 @@
+create table CDRHUA_RBODY
+(
+  fid   NUMBER not null,
+  fname VARCHAR2(128) not null,
+  rnum  NUMBER not null,
+  crc   NUMBER not null,
+  dtm   DATE not null,
+  rid   NUMBER not null,
+  rtype VARCHAR2(8) not null,
+  rbody VARCHAR2(4000) not null,
+  rvers VARCHAR2(2),
+  info  VARCHAR2(4000),
+  swid  NUMBER
+)
+nologging;
+create unique index UI_CDRHUA_RBODY on CDRHUA_RBODY (DTM, CRC, RVERS)
+  nologging;
+alter table CDRHUA_RBODY
+  add constraint CK_CDRHUA_RBODY_INFO_JSON
+  check (info is json)
+  disable
+  novalidate;
+
