@@ -42,3 +42,5 @@ Whats not here (yet):
 - anything about data distribution ( just select it )
 - anything abount data lifecycle management ( partitioning is a must, but final architecture is on your choice )
 - any GUI
+
+![OMG those russians](https://github.com/aperveyev/load_ASN1_to_ORA/blob/main/LOADING.jpg)
