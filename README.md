@@ -1,4 +1,6 @@
-## PL/SQL parser for some ASN.1 telecom files
+# PL/SQL parser for some ASN.1 telecom files
+
+[START FROM HERE](https://github.com/aperveyev/load_ASN1_to_ORA/blob/main/early_concept.md) to feel what I feel when spent 20 years with telecommunication Mediation Task.
 
 **What's this about**
 
