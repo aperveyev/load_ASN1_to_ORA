@@ -1,6 +1,6 @@
-## RDBMS-centric postpaid mediation for Telecom CDR-s
+# RDBMS-centric postpaid mediation for Telecom CDR-s
 
-# PREFACE
+## PREFACE
 
 Every modern Telecom carrier have to have mediation information system sitting between network and major information systems (customer billing, interconnect billing, traffic and service analytic systems etc). Even in the “prepaid and internet era” this mediation remains valuable and serves substantial part of the revenue stream.
 
@@ -8,7 +8,7 @@ Last decades, most (starting from the big) Telecoms driven by “convergent” h
 
 Lately in document term CDR will mean usage data from telecommunication network, mostly devoted to 1-record-for-event description (partial records for long calls and conference records correlation exists too but they are not dominant). Beside calls this case cover most VAS events (SMS etc) and opposed to IPDR usage data (Netflows etc) where incoming records vastly partial and requires massive aggregation (reduction). Also in most examples later RDBMS means Oracle, but general ideas remains the same.
 
-# WHATS WRONG WITH CONVERGENT MEDIATION
+## WHATS WRONG WITH CONVERGENT MEDIATION
 
 Before continuing we have to summarize some facts, clearly seen from decades:
 - hardware become more and more inexpensive, massively parallel clustering of commodity nodes became usual, unbelievable amounts of RAM, SSD and storage became available
@@ -26,7 +26,7 @@ The idea of all story is to discuss “de-convergence” possibilities for media
 What if separate CDR mediation into RDBMS and combine it with warehousing, where access to every CDR required ?
 What if leave convergent mediation with the things it do the best - aggregate ever-growing amounts of IPDRs in the resource constrained conditions and to provisioning required – or maybe unload/replace it with the modern open source scalable solutions ? 
 
-# RDBMS-CENTRIC PROCESSING OF CDR DATA
+## RDBMS-CENTRIC PROCESSING OF CDR DATA
 
 Let’s look at postpaid CDR mediation tasks in general:
 
