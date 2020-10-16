@@ -4,25 +4,41 @@
 
 **What's this about**
 
-Mediation is one of the telecom operator's tasks.
-Online Mediation is event-by-event processing with subsecond delays.
-Offline Mediation is file-based batch processor with in-out times from minutes to an hour.
-ALL THE FOLLOWING IS ABOUT OFFLINE MEDIATION.
+Here I promote the idea of **Oracle database centric offline Mediation**, which may be good choice when:
+- you already have an enough-licensed Oracle-cenric information system (Customer Billing and Interconnect Billing first of all), information exchange via database links is common to you
+- you are unhappy with current offline Mediation: it's too expensive (costs much more than hadrware), too black-boxed and changes are too hard to implement, vendor is too impudent etc
+- you have not overwhelming offline EDR amounts and ready to triple equipment power to Mediate on fingertips
+- you are ready to do some in-house development to fully control your offline Mediation till the network shutdown
 
-One of the valuable steps in Mediation is EDR (Event Data Records) file conversion from proprietary formats of equipment vendors to delimited text or database structures for further processing.
-The good practice is not to make valuable processing directly during conversion.
-Such converters - for the sake of efficiency - usually made with low level tools : C++, Java etc.
+With Oracle database as Mediation core you get, out of the box:
+- scalability and paralellism without specific coding efforts
+- native SQL-centric business logic description
+- data protection and security for SOX404 and other audits
+- very easy-to-do and effective information exchange (including dictionaries) with other corporate information systems
+- and don't care about PL/SQL unefficiency, do the things right and it will be OK
 
-Next big question whether to use database for Mediation transformation (format adjustments, filtering, enrichment, correlation, splitting) or do all that things
-with native processors over files. 
-Traditionally Big Mediation Vendors use second method for the efficiency and scalability, creating proprietary clustering, scaling, load balancing, fault recovery etc.
-As a side (?) effect that solutions are quite expensive and create "vendor locks" for telecom operators.
-Note that industrial RDBMS (Oracle etc) not came for free, it may be expensive too.
+One valuable thing I have to note now : **you must agree with my balance beetween flexibility and hardcoding**.
 
-The method of Mediation inside RDBMS is much less effective but gives operator "free hands" to process data with SQL and/or stored procedures.
-The only question remains - how to parse proprienary telecom equipment formats (Big Mediation Vendors gives that function out on the box).
-In most cases documentation for file formats comes with telecom equipment - but without any software for conversion. Operator need to create and support it.
+If you ready to build fixed-maximum-length processing workflow, reserve limited number of fields for the enrichment results 
+and not fear about several specific table structures (for every distinct type of EDR data) - my concept **"static structures - flexible algorithms"** is for you.
 
-Here I promote the idea of Oracle database centric offline Mediation
+But if you want flexible-steps-graph workflow with unbounded CreateAsSelect intermediate structures - this is another task, closer to generic ETL, and Oracle not the best for it. Try to find something else.
 
-**Main steps and tools here**
+**What's here**
+
+Here I present some solution (ideas and code) for jumpstart the Proof Of Concept for **Oracle database centric offline Mediation**.
+
+Here are (now for two specific type of EDR - HUAWEI PGW & HUAWEI SGSN - both coded with ASN.1 ):
+- data structures DDL for two specific type of EDRs
+- supporting data structures (register, logs, metrics) for the loading and parsing process
+- simple and dummy binary file parsers "to the records level" (language - C)
+- not so simple and dummy records parser "to the attribute level" (language - PL/SQL)
+- an example of enrichment algorithms including long-sessions partial records correlation (language - PL/SQL)
+- some supporting code for repetitive loading (language - PL/SQL)
+- not too complex Windows BATch for single-file and loop-files-in-folder loading
+
+Whats not here (yet):
+- any tools to massive downloading of files from everywhere and creating queue for loading ( simple FOR %%F in ( * ) LOOP emulate it )
+- anything about data distribution ( just select it )
+- anything abount data lifecycle management ( partitioning is a must, but final architecture is on your choice )
+- any GUI
